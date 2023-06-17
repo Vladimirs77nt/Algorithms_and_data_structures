@@ -5,21 +5,34 @@ import java.util.Random;
 public class Lesson_02 {
     public static void main(String[] args) {
 
-        int[] array = new int[50000000];
+        int[] array = new int[100];
         for (int i = 0; i < array.length; i++)
-            array[i] = new Random().nextInt(200);
+            array[i] = new Random().nextInt(100);
+        int[] array1 = array;
         int[] array2 = array;
-        LocalTime timeQuickSortStart = LocalTime.now();
-        quickSort(array);
-        LocalTime timeQuickSortEnd = LocalTime.now();
 
-        LocalTime timeInsertSortStart = LocalTime.now();
-        inserterSort(array2);
-        LocalTime timeInsertSortEnd = LocalTime.now();
+        // LocalTime timeQuickSortStart = LocalTime.now();
 
-        System.out.println("Быстрая сортировка: " + Duration.between(timeQuickSortStart, timeQuickSortEnd));
+        System.out.println();
+        System.out.print("Исходный массив чисел: ");
+        printArray(array1);
+        System.out.println();
 
-        System.out.println("Сортировка вставками: " + Duration.between(timeInsertSortStart, timeInsertSortEnd));
+        quickSort(array1);
+
+        System.out.print("Отсортированный массив чисел: ");
+        printArray(array1);
+        System.out.println();
+
+        // LocalTime timeQuickSortEnd = LocalTime.now();
+
+        // LocalTime timeInsertSortStart = LocalTime.now();
+        // inserterSort(array2);
+        // LocalTime timeInsertSortEnd = LocalTime.now();
+
+        // System.out.println("Быстрая сортировка: " + Duration.between(timeQuickSortStart, timeQuickSortEnd));
+
+        // System.out.println("Сортировка вставками: " + Duration.between(timeInsertSortStart, timeInsertSortEnd));
     }
 
 
@@ -70,5 +83,12 @@ public class Lesson_02 {
             // В освободившееся место вставляем вытащенное значение
             array[i + 1] = value;
         }
+    }
+
+    public static void printArray(int array[]){
+        for (int i : array) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
     }
 }

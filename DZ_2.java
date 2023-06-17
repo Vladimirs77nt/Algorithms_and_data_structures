@@ -12,13 +12,11 @@ public class DZ_2 {
         for (int i = 0; i < array.length; i++)
             array[i] = new Random().nextInt(200);
 
-        
         LocalTime timeHeapSortStart = LocalTime.now();
         heapSort(array);
         LocalTime timeHeapSortEnd = LocalTime.now();
 
         System.out.println("Быстрая сортировка: " + Duration.between(timeHeapSortStart, timeHeapSortEnd));
-
     }
 
     static void heapSort(int arr[]) {
@@ -51,8 +49,7 @@ public class DZ_2 {
         if (left < n && arr[left] > arr[largest])
             largest = left;
 
-        // Если правый дочерний элемент больше, чем самый большой элемент на данный
-        // момент
+        // Если правый дочерний элемент больше, чем самый большой элемент на данный момент
         if (right < n && arr[right] > arr[largest])
             largest = right;
         // Если самый большой элемент не корень
