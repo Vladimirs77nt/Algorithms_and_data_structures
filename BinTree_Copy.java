@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class BinTree<T extends Comparable<T>> {
+public class BinTree_Copy<T extends Comparable<T>> {
     Node root;
     public boolean add(T value) {
         if (root == null) {
@@ -143,9 +143,7 @@ public class BinTree<T extends Comparable<T>> {
         Color color;
         Node left;
         Node right;
-        Node() {
-            color = Color.Red;
-        }
+
         Node(T _value) {
             this.value = _value;
             left = null;
@@ -171,14 +169,17 @@ public class BinTree<T extends Comparable<T>> {
             this.str = node.value.toString();
         }
     }
-    public void print() {
 
+    /**
+     * Метод печати дерева
+     */
+    public void print() {
         int maxDepth = maxDepth() + 3;
         int nodeCount = nodeCount(root, 0);
         int width = 50;//maxDepth * 4 + 2;
         int height = nodeCount * 5;
         List<List<PrintNode>> list = new ArrayList<List<PrintNode>>();
-        for (int i = 0; i < height; i++) /*РЎРѕР·РґР°РЅРёРµ СЏС‡РµРµРє РјР°СЃСЃРёРІР°*/ {
+        for (int i = 0; i < height; i++) /*Создание ячеек массива*/ {
             ArrayList<PrintNode> row = new ArrayList<>();
             for (int j = 0; j < width; j++) {
                 row.add(new PrintNode());
@@ -189,7 +190,7 @@ public class BinTree<T extends Comparable<T>> {
         list.get(height / 2).set(0, new PrintNode(root));
         list.get(height / 2).get(0).depth = 0;
 
-        for (int j = 0; j < width; j++)  /*РџСЂРёРЅС†РёРї Р·Р°РїРѕР»РЅРµРЅРёСЏ*/ {
+        for (int j = 0; j < width; j++)  /*Принцип заполнения*/ {
             for (int i = 0; i < height; i++) {
                 PrintNode currentNode = list.get(i).get(j);
                 if (currentNode.node != null) {
@@ -213,7 +214,7 @@ public class BinTree<T extends Comparable<T>> {
                 }
             }
         }
-        for (int i = 0; i < height; i++) /*Р§РёСЃС‚РєР° РїСѓСЃС‚С‹С… СЃС‚СЂРѕРє*/ {
+        for (int i = 0; i < height; i++) /*Чистка пустых строк*/ {
             boolean flag = true;
             for (int j = 0; j < width; j++) {
                 if (list.get(i).get(j).str != " ") {
@@ -235,8 +236,10 @@ public class BinTree<T extends Comparable<T>> {
             System.out.println();
         }
     }
+
+    // ниже -> внутренние методы для печати дерева
     private void printLines(List<List<PrintNode>> list, int i, int j, int i2, int j2) {
-        if (i2 > i) // РРґС‘Рј РІРЅРёР·
+        if (i2 > i) // Идём вниз
         {
             while (i < i2) {
                 i++;
@@ -259,9 +262,11 @@ public class BinTree<T extends Comparable<T>> {
             }
         }
     }
+
     public int maxDepth() {
         return maxDepth2(0, root);
     }
+
     private int maxDepth2(int depth, Node node) {
         depth++;
         int left = depth;
@@ -272,6 +277,7 @@ public class BinTree<T extends Comparable<T>> {
             right = maxDepth2(depth, node.right);
         return left > right ? left : right;
     }
+
     private int nodeCount(Node node, int count) {
         if (node != null) {
             count++;

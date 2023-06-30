@@ -147,7 +147,7 @@ public class RBTree<T extends Comparable<T>> {
     }
 
     /**
-     * левосторонняя
+     * левый разворот
      * 
      * @param node
      * @return
@@ -162,6 +162,12 @@ public class RBTree<T extends Comparable<T>> {
         return left;
     }
 
+    /**
+     * правый разворот
+     * 
+     * @param node
+     * @return
+     */
     private Node rightSwap(Node node) {
         Node right = node.right;
         Node between = right.left;
@@ -173,60 +179,16 @@ public class RBTree<T extends Comparable<T>> {
     }
 
     // -------------------------------
-
     /**
-     * метод для вывода дерева
-     */
-    public String toString() {
-        StringBuilder buffer = new StringBuilder(50);
-        print(prime, buffer, "", "");
-        System.out.println();
-        return buffer.toString();
-    }
-
-    private void print(Node currentNode, StringBuilder buffer, String prefix, String childrenPrefix) {
-        buffer.append(prefix);
-        buffer.append(currentNode.value);
-        buffer.append('\n');
-
-        while (currentNode != null) {
-            printinfo(currentNode);
-        
-            if (currentNode.left != null){
-                print(currentNode.left, buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
-            } else if (currentNode.right != null) {
-                print(currentNode.right, buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
-            } else {
-                System.out.print("/n////");
-                buffer.append(childrenPrefix + "    └── ");
-                buffer.append(currentNode.value);
-                buffer.append('\n');
-            }
-
-            System.out.print("-");
-            return;
-        }
-    }
-
-    private void printinfo(Node node) {
-        System.out.println("Нода: " + node.value);
-        if (node.left != null) System.out.println(" > Левый потомок: " + node.left.value);
-        else System.out.println(" > Левого потомка нет");
-        if (node.right != null) System.out.println(" > Правый потомок: " + node.right.value);
-        else System.out.println(" > Правого потомка нет");
-        System.out.println();
-    }
-
-   /**
      * Метод печати дерева
      */
     public void print() {
         int maxDepth = maxDepth() + 3;
         int nodeCount = nodeCount(prime, 0);
-        int width = 50;//maxDepth * 4 + 2;
+        int width = 50;// maxDepth * 4 + 2;
         int height = nodeCount * 5;
         List<List<PrintNode>> list = new ArrayList<List<PrintNode>>();
-        for (int i = 0; i < height; i++) /*Создание ячеек массива*/ {
+        for (int i = 0; i < height; i++) /* Создание ячеек массива */ {
             ArrayList<PrintNode> row = new ArrayList<>();
             for (int j = 0; j < width; j++) {
                 row.add(new PrintNode());
@@ -237,7 +199,7 @@ public class RBTree<T extends Comparable<T>> {
         list.get(height / 2).set(0, new PrintNode(prime));
         list.get(height / 2).get(0).depth = 0;
 
-        for (int j = 0; j < width; j++)  /*Принцип заполнения*/ {
+        for (int j = 0; j < width; j++) /* Принцип заполнения */ {
             for (int i = 0; i < height; i++) {
                 PrintNode currentNode = list.get(i).get(j);
                 if (currentNode.node != null) {
@@ -261,7 +223,7 @@ public class RBTree<T extends Comparable<T>> {
                 }
             }
         }
-        for (int i = 0; i < height; i++) /*Чистка пустых строк*/ {
+        for (int i = 0; i < height; i++) /* Чистка пустых строк */ {
             boolean flag = true;
             for (int j = 0; j < width; j++) {
                 if (list.get(i).get(j).str != " ") {

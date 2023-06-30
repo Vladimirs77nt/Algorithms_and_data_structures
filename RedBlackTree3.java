@@ -1,5 +1,7 @@
 // Java program to implement insert operation in Red Black Tree.
 
+import java.util.Random;
+
 public class RedBlackTree3 {
 
     private static Node root = null;
@@ -129,8 +131,10 @@ public class RedBlackTree3 {
         RedBlackTree3 node = new RedBlackTree3();
         System.out.println("Красно-черное дерево. Вариант 3");
 
-        for (int i = 0; i < 10; i++) {
-            root = node.insert(root, i);
+        for (int i = 0; i < 20; i++) {
+            int item = new Random().nextInt(20);
+            System.out.println("Добавляем: " + item);
+            root = node.insert(root, item);
             root.color = false;
         }
 

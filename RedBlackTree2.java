@@ -430,13 +430,14 @@ public class RedBlackTree2 {
 	//-------------------------------------------------------------
 	public static void main(String [] args){
     	RedBlackTree2 tree = new RedBlackTree2();
-
+		System.out.println();
+		
 		// заполнение дерева значениями от 0 до 19
         for (int i = 0; i < 20; i++) {
-			System.out.println("Итерация №" + i + "  добавленное значение: "+i);
+			// System.out.println("Итерация №" + i + "  добавленное значение: "+i);
+			// tree.printTree();
+			// System.out.println();
 			tree.insert(i);
-			tree.printTree();
-			System.out.println();
 		}
 
 		System.out.println("Результат:");
