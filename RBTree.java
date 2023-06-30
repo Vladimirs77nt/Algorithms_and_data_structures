@@ -217,92 +217,16 @@ public class RBTree<T extends Comparable<T>> {
         System.out.println();
     }
 
-    // ------------------------------------------------------------------
-    // ------ МОДУЛИ НЕ ИСПОЛЬЗУЕМЫЕ ДЛЯ СОРТИРОВКИ ДЕРЕВА -------------
-    /**
-     * метод удаления ноды
-     * 
-     * @param value
-     * @return - возвращает True/False (удалено/нет)
+   /**
+     * Метод печати дерева
      */
-    public boolean remove(T value) {
-        if (!contain(value))
-            return false;
-        Node deleteNode = prime;
-        Node prevNode = prime;
-        while (deleteNode != null) {
-            if (deleteNode.value.compareTo(value) == 0) {
-                Node currentNode = deleteNode.right;
-                if (currentNode == null) {
-                    if (deleteNode == prime) {
-                        prime = prime.left;
-                        prime.color = Color.Black;
-                        return true;
-                    }
-                    deleteNode = equalization(deleteNode);
-                    if (deleteNode.left == null) {
-                        deleteNode = null;
-                        return true;
-                    }
-                    if (prevNode.left == deleteNode)
-                        prevNode.left = deleteNode.left;
-                    else
-                        prevNode.right = deleteNode.left;
-                    return true;
-                }
-                while (currentNode.left != null)
-                    currentNode = currentNode.left;
-                deleteNode = equalization(deleteNode);
-                deleteNode.value = currentNode.value;
-                currentNode = null;
-                return true;
-            }
-            if (prevNode != deleteNode) {
-                if (prevNode.value.compareTo(value) > 0)
-                    prevNode = prevNode.left;
-                else
-                    prevNode = prevNode.right;
-            }
-            if (deleteNode.value.compareTo(value) > 0)
-                deleteNode = deleteNode.left;
-            else
-                deleteNode = deleteNode.right;
-        }
-        return false;
-    }
-
-    /**
-     * проверка существования ноды с заданным значением
-     * (внутренний модуль для метода удаления ноды)
-     * 
-     * @param value - искомое значение
-     * @return - возвращает True/False (есть/нет)
-     */
-    private boolean contain(T value) {
-        Node currentNode = prime;
-        while (currentNode != null) {
-            if (currentNode.value.equals(value))
-                return true;
-            if (currentNode.value.compareTo(value) > 0)
-                currentNode = currentNode.left;
-            else
-                currentNode = currentNode.right;
-        }
-        return false;
-    }
-
-    // ---------------- МУСОРКА
-
-    /**
-     * метод печати дерева
-     */
-    public void print222() {
+    public void print() {
         int maxDepth = maxDepth() + 3;
         int nodeCount = nodeCount(prime, 0);
-        int width = 50;// maxDepth * 4 + 2;
+        int width = 50;//maxDepth * 4 + 2;
         int height = nodeCount * 5;
         List<List<PrintNode>> list = new ArrayList<List<PrintNode>>();
-        for (int i = 0; i < height; i++) /* Создание ячеек массива */ {
+        for (int i = 0; i < height; i++) /*Создание ячеек массива*/ {
             ArrayList<PrintNode> row = new ArrayList<>();
             for (int j = 0; j < width; j++) {
                 row.add(new PrintNode());
@@ -313,7 +237,7 @@ public class RBTree<T extends Comparable<T>> {
         list.get(height / 2).set(0, new PrintNode(prime));
         list.get(height / 2).get(0).depth = 0;
 
-        for (int j = 0; j < width; j++) /* Принцип заполнения */ {
+        for (int j = 0; j < width; j++)  /*Принцип заполнения*/ {
             for (int i = 0; i < height; i++) {
                 PrintNode currentNode = list.get(i).get(j);
                 if (currentNode.node != null) {
@@ -337,7 +261,7 @@ public class RBTree<T extends Comparable<T>> {
                 }
             }
         }
-        for (int i = 0; i < height; i++) /* Чистка пустых строк */ {
+        for (int i = 0; i < height; i++) /*Чистка пустых строк*/ {
             boolean flag = true;
             for (int j = 0; j < width; j++) {
                 if (list.get(i).get(j).str != " ") {
@@ -360,7 +284,6 @@ public class RBTree<T extends Comparable<T>> {
         }
     }
 
-    // внутренний модуль для печати ноды
     private void printLines(List<List<PrintNode>> list, int i, int j, int i2, int j2) {
         if (i2 > i) // Идём вниз
         {
@@ -386,12 +309,10 @@ public class RBTree<T extends Comparable<T>> {
         }
     }
 
-    // внутренний модуль для печати ноды
     public int maxDepth() {
         return maxDepth2(0, prime);
     }
 
-    // внутренний модуль для печати ноды
     private int maxDepth2(int depth, Node node) {
         depth++;
         int left = depth;
@@ -403,7 +324,6 @@ public class RBTree<T extends Comparable<T>> {
         return left > right ? left : right;
     }
 
-    // внутренний модуль для печати ноды
     private int nodeCount(Node node, int count) {
         if (node != null) {
             count++;
